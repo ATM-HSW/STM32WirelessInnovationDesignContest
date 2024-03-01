@@ -1,6 +1,9 @@
-# Universal room sensor for various MCUs with communication interfaces
+# STM32 Wireless Innovation Design Contest
 
-## Teaser:
+
+## Universal room sensor for various MCUs with communication interfaces
+
+### Teaser:
 
 As part of this project, a multi-sensor module is being developed with which various room parameters can be measured. In addition to the usual measured values of temperature, humidity and air pressure, the indoor air quality is also to be determined using VOC and CO2 sensors. A multi-channel light measurement is also to be carried out.
 
@@ -10,16 +13,16 @@ Programming should be as simple as possible using existing libraries and softwar
 
 The choice in this competition fell on the relatively new STM32WB52xx platform. Experience with other STM Nucleo boards forms the basis for this project.
 
-## Project Details
+### Project Details
 
 The universal room sensor is being developed as the most universal platform possible to measure the parameters of the environment, i.e. rooms such as a lecture theatres, seminar rooms or offices. It should also be possible to test different MCU variants with different communication interfaces and different software environments.
 
 The aim is to equip the rooms of a university with the room sensor. Staff and students should be able to access the sensor values. In future, however, it should also be possible to use the values for needs-based and energy-efficient control of the rooms and integration into the Building Information Management (BIM) system.
 
-![[images/pic1.jpg]]
+![pic1](./images/pic1.jpg)
 
 
-## System Overview
+### System Overview
 
 As the chosen platform Nucleo-WBA52 is still relatively new, the software support is not yet as extensive as with hardware platforms that have been available for longer. The aim of this project is not the direct use of STM's Cube Packages but of development environments such as Arduino and Circuit-/Micropython. The Python variants are not yet available at the release date 01.03.2024. The Arduino platform STM32duino [sta1] has contained the extension for the STM32WBA family in the main branch since 29/02/2024. However, the planned release 2.8 is not yet available at the time of publication. According to the instructions [sta2], however, a Git branch can also be used for development.
 
@@ -29,13 +32,13 @@ A test shield from a previous project is used to connect the MultiSensor module 
 
 Both adapter boards were designed with eagle. The CAD data is available in the project repository at Github (link under software used)
 
-## Sensor hardware
+### Sensor hardware
 
 The MultiSensor module contains various sensors for measuring environmental parameters. All sensors are connected to the MCU via an I2C bus. The sensors were selected based on the availability of the ICs and the availability of open source drivers for the development environments analysed. The I2C bus can be used in two ways: on a pin header and via dual QUIIC sockets. As there is an overlap between the I2C addresses of the APDS9960 and AS7341 light sensors, two I2C buses are used. However, both buses are connected by default via solder jumpers. The two solder jumpers only need to be disconnected if both light sensors are to be used. In this case, the APDS9960 is no longer available at the QWIIC sockets, but only via the pin headers.
 
 The only special mechanical feature of the board layout is the thermal decoupling of the two temperature sensors BME680 and HTU21 on the left-hand side of the board.
 
-![[images/pic2.jpg]]
+![pic2](./images/pic2.jpg)
 
 - Sensor 1: CO2 sensor SCD4x
 
@@ -69,10 +72,10 @@ The circuit and layout were designed using eagle. The respective data sheet info
 
 The CAD data is available on the car's Github account. The hardware is fully tested, including the sensors missing in the figure above.
 
-![[images/pic3.jpg]]
-![[images/pic4.jpg]]
+![pic3](./images/pic3.jpg)
+![pic4](./images/pic4.jpg)
 
-# Software
+### Software
 
 - Variant 1: Nucleo-F767 and Micropython
 
@@ -86,7 +89,7 @@ However, the division of the flash has proved to be a significant disadvantage. 
 
 The statements made about variant 1 also apply to variant 2. As essentially only sensors that are also sold by Adafruit are used, the software support is even simpler than under Micropython. However, the same restriction also applies to Circuitpython: the flash size for the Python sources is too small. Another disadvantage is the lack of network support.
 
-### Summary of variants 1 and 2:
+#### Summary of variants 1 and 2:
 
 If it were not for the limitation of the flash size, Micro- and Circuitpython could be very good development environments for the use of the MultiSensor. The lack of Ethernet support in Circuitpython is an exclusion criterion if a cloud connection is required.
 
@@ -102,13 +105,13 @@ As the port for the STM32WBAxx family was not yet available at the start of the 
 
 The application developed for variant 3 could be used directly for variant 4. It was only necessary to adapt the I2C pins.
 
-### Summary of variants 3 and 4:
+#### Summary of variants 3 and 4:
 
 As the Arduino environment has existed for a very long time, there are many examples, drivers etc. available. Not everything is immediately usable. But changes are usually limited. Due to the unavoidable compile-link-flash cycle, development is significantly less agile than with a Python variant. However, the usage is also possible with an acceptable amount of effort.
 
 The sources of the implementations are available in the project repository at Github (link under Software used).
 
-# Literature:
+## Literature:
 
 [ad] Adafruit Industries, LLC. url: www.adafruit.com
 
@@ -120,7 +123,7 @@ The sources of the implementations are available in the project repository at Gi
 
 [sta2] STM32duino git repo integratio into Arduino IDE. url: https://github.com/stm32duino/Arduino_Core_STM32/wiki/Using-git-repository
 
-# Used Software
+## Used Software
 
 STM32duino
 
